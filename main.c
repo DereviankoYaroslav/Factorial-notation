@@ -6,12 +6,12 @@ void sortAndFind(int *func, int size);
 
 int main( )
 {
-    int x = 425;
-    int n = 6;
+    int x = 5;
+    int n = 4;
     int q = 1;
     int counter = n-1;
     int positions[n];
-    while (x > 0){
+    while (counter > 0){
         int temp = floor(x/q);
         printf("\n%d", temp);
         int val = x - (temp*q);
@@ -27,9 +27,63 @@ int main( )
         printf("%d ",positions[i]);
     }
     printf("\n");
-    int fx [] = {1,2,3,4,5,6};
-
-    //sortAndFind(fx,6);
+    int result[n];
+    int fx [] = {1,2,3,4};
+    int fx2 [] = {4,3,2,1};
+    int tempArr [n];
+    int flags [] = {3,2,1,0};
+    for (int c = 0; c < n; ++c){
+        tempArr[c] = fx2[c];
+    }
+    int flag = 0;
+    int innerCounter = n;
+    for (int q = 0; q < n; ++q){
+        for (int m = 0; m < n; ++m){
+            printf("%d ", tempArr[m]);
+            if (tempArr[m] == innerCounter) {
+                int y = m;
+                for (int t = y; t < n; ++t) {
+                    if (tempArr[y] > tempArr[t]) {
+                        ++flag;
+                    }
+                }
+            }
+        }
+        printf("\nflag %d, \n",flag);
+        printf("\nposition %d, \n",positions[q]);
+        //int k = 0;
+        if (flag > positions[q]) {
+            int temp = tempArr[flag-positions[q]];
+            tempArr[flag-positions[q]] = tempArr[q];
+            tempArr[q] = temp;
+        }
+        flag = 0;
+        innerCounter--;
+    }
+    printf("\n");
+    printf("\n");
+    for (int i = 0; i < n; ++i){
+        printf("%d ",tempArr[i]);
+    }
+    printf("\n");
+    /*for (int i = 0; i < n; ++i){
+        for (int j = 0; j  < n; ++j) {
+            if (positions[i] < fx[j]) {
+                result[i] = fx[j];
+                fx[j] = 0;
+                break;
+            }
+        }
+    }
+    printf("\n");
+    printf("\n");*/
+    /*for (int i = 0; i < n; ++i){
+        //result[i] = result[i]-1;
+        printf("%d ",result[i]);
+    }*/
+    printf("\n");
+    //int fx3 [] = {1,2,3,4};
+    //sortAndFind(fx3,4);
     /*while (q < n){
     int temp = floor((double)x/q);
     printf("\n%d", temp);
