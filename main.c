@@ -6,13 +6,13 @@ void sortAndFind(int *func, int size);
 
 int main( )
 {
-    int x = 100;
-    int n = 5;
-    int q = 2;
-    int counter = n-2;
-    int positions[n-1];
-    while (q < n){
-        int temp = floor((double)x/q);
+    int x = 425;
+    int n = 6;
+    int q = 1;
+    int counter = n-1;
+    int positions[n];
+    while (x > 0){
+        int temp = floor(x/q);
         printf("\n%d", temp);
         int val = x - (temp*q);
         printf("\n%d", val);
@@ -21,15 +21,27 @@ int main( )
         ++q;
         counter--;
     }
-    printf("\n%d", x);
     positions[counter] = x;
     printf("\n\nPOSITIONS VECTOR\n");
-    for (int i = 0; i < n-1; ++i){
+    for (int i = 0; i < n; ++i){
         printf("%d ",positions[i]);
     }
     printf("\n");
-    //int fx [] = {1,2,3,4,5,6};
+    int fx [] = {1,2,3,4,5,6};
+
     //sortAndFind(fx,6);
+    /*while (q < n){
+    int temp = floor((double)x/q);
+    printf("\n%d", temp);
+    int val = x - (temp*q);
+    printf("\n%d", val);
+    positions[counter] = val;
+    x = temp;
+    ++q;
+    counter--;
+    }
+    printf("\n%d", x);
+    positions[counter] = x;*/
     return 0;
 }
 
