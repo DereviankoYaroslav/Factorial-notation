@@ -6,8 +6,8 @@ void sortAndFind(int *func, int size);
 
 int main( )
 {
-    int x = 5;
-    int n = 4;
+    int x = 100;
+    int n = 5;
     int q = 1;
     int counter = n-1;
     int positions[n];
@@ -23,13 +23,13 @@ int main( )
     }
     positions[counter] = x;
     printf("\n\nPOSITIONS VECTOR\n");
-    for (int i = 0; i < n; ++i){
+    for (int i = 0; i <n ; ++i){
         printf("%d ",positions[i]);
     }
     printf("\n");
     int result[n];
     int fx [] = {1,2,3,4};
-    int fx2 [] = {4,3,2,1};
+    int fx2 [] = {3,2,1,0};
     int tempArr [n];
     int flags [] = {3,2,1,0};
     for (int c = 0; c < n; ++c){
