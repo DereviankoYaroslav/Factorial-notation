@@ -6,7 +6,7 @@ void sortAndFind(int *func, int size);
 
 int main( )
 {
-    int x = 100;
+    int x = 1;
     int n = 5;
     int q = 1;
     int counter = n-1;
@@ -27,75 +27,28 @@ int main( )
         printf("%d ",positions[i]);
     }
     printf("\n");
-    int result[n];
-    int fx [] = {1,2,3,4};
-    int fx2 [] = {3,2,1,0};
-    int tempArr [n];
-    int flags [] = {3,2,1,0};
-    for (int c = 0; c < n; ++c){
-        tempArr[c] = fx2[c];
-    }
-    int flag = 0;
-    int innerCounter = n;
-    for (int q = 0; q < n; ++q){
-        for (int m = 0; m < n; ++m){
-            printf("%d ", tempArr[m]);
-            if (tempArr[m] == innerCounter) {
-                int y = m;
-                for (int t = y; t < n; ++t) {
-                    if (tempArr[y] > tempArr[t]) {
-                        ++flag;
-                    }
-                }
-            }
+    int substitution [] = {0,0,0,0,0};
+    int arrVal = n;
+    int newN = n;
+    for (int i = 0; i < n; ++i){
+        printf("\nposi = %d ",newN-positions[i]);
+        printf("\narrval = %d ",arrVal);
+        if(substitution[newN-positions[i]-1]==0) {
+            substitution[newN - positions[i] - 1] = arrVal;
         }
-        printf("\nflag %d, \n",flag);
-        printf("\nposition %d, \n",positions[q]);
-        //int k = 0;
-        if (flag > positions[q]) {
-            int temp = tempArr[flag-positions[q]];
-            tempArr[flag-positions[q]] = tempArr[q];
-            tempArr[q] = temp;
+        else {
+            substitution[newN - positions[i] - 2] = arrVal;
         }
-        flag = 0;
-        innerCounter--;
+        if (positions[i]==0){
+            newN--;
+        }
+        arrVal--;
     }
     printf("\n");
     printf("\n");
     for (int i = 0; i < n; ++i){
-        printf("%d ",tempArr[i]);
+        printf("%d ", substitution[i]);
     }
-    printf("\n");
-    /*for (int i = 0; i < n; ++i){
-        for (int j = 0; j  < n; ++j) {
-            if (positions[i] < fx[j]) {
-                result[i] = fx[j];
-                fx[j] = 0;
-                break;
-            }
-        }
-    }
-    printf("\n");
-    printf("\n");*/
-    /*for (int i = 0; i < n; ++i){
-        //result[i] = result[i]-1;
-        printf("%d ",result[i]);
-    }*/
-    printf("\n");
-    //int fx3 [] = {1,2,3,4};
-    //sortAndFind(fx3,4);
-    /*while (q < n){
-    int temp = floor((double)x/q);
-    printf("\n%d", temp);
-    int val = x - (temp*q);
-    printf("\n%d", val);
-    positions[counter] = val;
-    x = temp;
-    ++q;
-    counter--;
-    }
-    printf("\n%d", x);
-    positions[counter] = x;*/
     return 0;
 }
 
