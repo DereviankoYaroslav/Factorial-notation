@@ -11,7 +11,7 @@ int *numberToSubstitution(int *number, int size);
 int main(){
 
     int n = 5;
-    int mass [] = {0,1,1,2,3};
+    int mass [] = {0,0,0,3,4};
     printf("\n");
     int *sub = numberToSubstitution(mass,n);
 }
