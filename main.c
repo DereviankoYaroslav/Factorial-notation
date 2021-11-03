@@ -11,9 +11,9 @@ int *numberToSubstitution(int *number, int size);
 int main(){
 
     int n = 5;
-    int mass [] = {0,0,0,3,4};
-    printf("\n");
-    int *sub = numberToSubstitution(mass,n);
+    int *arr = numberToFactorial(119,n);
+    //int mass [] = {0,1,0,0};
+    int *sub = numberToSubstitution(arr,n);
 }
 
 int *numberToSubstitution(int *number, int size){
@@ -21,7 +21,7 @@ int *numberToSubstitution(int *number, int size){
     int newSize = size;
     int counter = 0;
     int innerCounter = 0;
-    while(counter < 5){
+    while(counter < size){
         int *emptyPos = calloc (newSize,sizeof(int));
         for (int i = 0; i < size; ++i){
             if (S[i]==0){
@@ -182,10 +182,15 @@ int *numberToFactorial(int x, int n){
         counter--;
     }
     positions[counter] = x;
+    int *positionsRev = calloc (n,sizeof(int));
+    for (int r = 0,t = n-1; r < n, t>=0; ++r, t--){
+        positionsRev[t] = positions[r];
+    }
     printf("\n\nPOSITIONS VECTOR\n");
-    for (int i = 0; i <n ; ++i){
-        printf("%d ",positions[i]);
+    for (int i = 0; i < n ; ++i){
+        printf("%d ",positionsRev[i]);
     }
     printf("\n");
-    return positions;
+    free(positions);
+    return positionsRev;
 }
