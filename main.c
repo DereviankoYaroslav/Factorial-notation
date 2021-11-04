@@ -10,8 +10,8 @@ int *numberToSubstitution(int *number, int size);
 
 int main(){
 
-    int n = 5;
-    int *arr = numberToFactorial(114,n);
+    int n = 7;
+    int *arr = numberToFactorial(5039,n);
     //int mass [] = {0,1,0,0};
     int *sub = numberToSubstitution(arr,n);
     printf("\n\nRESULT\n");
