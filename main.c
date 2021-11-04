@@ -11,15 +11,22 @@ int *numberToSubstitution(int *number, int size);
 int main(){
 
     int n = 5;
-    int *arr = numberToFactorial(119,n);
+    int *arr = numberToFactorial(114,n);
     //int mass [] = {0,1,0,0};
     int *sub = numberToSubstitution(arr,n);
+    printf("\n\nRESULT\n");
+    for (int i = 0; i < n; ++i){
+        printf("%d, ",sub[i]);
+    }
+    printf("\n");
 }
 
 int *numberToSubstitution(int *number, int size){
     int *S = calloc (size,sizeof(int));
+    int *result = calloc (size,sizeof(int));
     int newSize = size;
     int counter = 0;
+    int coeffNum = 0;
     int innerCounter = 0;
     while(counter < size){
         int *emptyPos = calloc (newSize,sizeof(int));
@@ -37,6 +44,8 @@ int *numberToSubstitution(int *number, int size){
                 printf("q = %d ",q);
                 printf("MT pos = %d ",emptyPos[q]);
                 S[emptyPos[q]] = 1;
+                result[coeffNum] = emptyPos[q];
+                ++coeffNum;
             }
         }
         innerCounter = 0;
@@ -49,7 +58,19 @@ int *numberToSubstitution(int *number, int size){
         newSize--;
         free(emptyPos);
     }
-    return S;
+    int numberInArr = size;
+    int *sub = calloc (size,sizeof(int));
+    for (int u = 0; u < size; ++u){
+        sub[result[u]] = numberInArr;
+        numberInArr--;
+    }
+    free(result);
+    int *subRev = calloc (size,sizeof(int));
+    for (int r = 0,t = size-1; r < size, t>=0; ++r, t--){
+        subRev[t] = sub[r];
+    }
+    free(sub);
+    return subRev;
 }
 
 void sortComb (int *s, int N)
