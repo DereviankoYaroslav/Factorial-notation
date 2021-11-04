@@ -2,9 +2,6 @@
 #include <math.h>
 #include <malloc.h>
 
-void sortComb (int *s, int N);
-void sortAndFind(int *func, int size);
-void factorialCS (int x, int n);
 int *numberToFactorial(int x, int n);
 int *numberToSubstitution(int *number, int size);
 
@@ -12,7 +9,6 @@ int main(){
 
     int n = 7;
     int *arr = numberToFactorial(5039,n);
-    //int mass [] = {0,1,0,0};
     int *sub = numberToSubstitution(arr,n);
     printf("\n\nRESULT\n");
     for (int i = 0; i < n; ++i){
@@ -70,121 +66,8 @@ int *numberToSubstitution(int *number, int size){
         subRev[t] = sub[r];
     }
     free(sub);
+    free(S);
     return subRev;
-}
-
-void sortComb (int *s, int N)
-{
-    int i,j;
-    int buf;
-
-    for ( i=0;i<N;i++)
-        for ( j=N-1;j>i;j--)
-            if (s[j]<s[j-1])
-            {
-                buf=s[j];
-                s[j]=s[j-1];
-                s[j-1]=buf;
-            }
-
-}
-
-void sortAndFind(int *func, int size){
-    int buf;
-    int i,j,N,k,q;
-    N=size;
-    int counter = 0;
-
-    sortComb(func, N);
-
-    while (1) {
-        printf("\n");
-        printf("\n%d\n",counter);
-        for (int m = 0; m < size; ++m) {
-            printf("%d, ", func[m]);
-        }
-        printf("\n");
-
-        int one = 0,zer = 0;
-
-        for (int t = 0; t < size; ++t) {
-            if (func[t] == 1) {
-                ++one;
-            } else if (func[t] == 0) {
-                ++zer;
-            }
-        }
-
-        for (i = N-2; i >= 0  && func[i] >= func[i+1] ; i--);
-        if (i<0) break;
-        for(j=N-1; func[i] >= func[j]; j--) ;
-        buf = func[j];
-        func[j] = func[i];
-        func[i] = buf;
-
-        for ( k=i+1, q=N-1; k < q; k++ , q-- )
-        {   buf=func[k];
-            func[k]=func[q];
-            func[q]=buf;
-        }
-        one = 0;
-        zer = 0;
-        ++counter;
-    }
-    printf("\n");
-}
-void factorialCS (int x, int n){
-    int q = 1;
-    int counter = n-1;
-    int positions[n];
-    while (counter > 0){
-        int temp = floor(x/q);
-        printf("\n%d", temp);
-        int val = x - (temp*q);
-        printf("\n%d", val);
-        positions[counter] = val;
-        x = temp;
-        ++q;
-        counter--;
-    }
-    positions[counter] = x;
-    printf("\n\nPOSITIONS VECTOR\n");
-    for (int i = 0; i <n ; ++i){
-        printf("%d ",positions[i]);
-    }
-    printf("\n");
-    int substitution [] = {0,0,0,0,0};
-    int arrVal = n;
-    int newN = n;
-    for (int i = 0; i < n; ++i){
-        printf("\nposi = %d ",newN-positions[i]);
-        printf("\narrval = %d ",arrVal);
-        if(substitution[newN-positions[i]-1]==0) {
-            substitution[newN - positions[i] - 1] = arrVal;
-        }
-            /*else if (substitution[newN-positions[i]-1]==0&&positions[i]==0){
-                substitution[newN - positions[i]] = arrVal;
-            }*/
-        else if (substitution[newN-positions[i]-1]!=0&&positions[i]==0){
-            int newnewN = newN;
-            while(substitution[newnewN-positions[i]-1]>arrVal){
-                newnewN++;
-            }
-            printf("newnewN %d ", newnewN);
-            substitution[newnewN - positions[i]] = arrVal;
-            printf("arrval = %d",arrVal);
-        }
-        else if (substitution[newN-positions[i]-1]!=0&&positions[i]!=0){
-            substitution[newN - positions[i]+1] = arrVal;
-        }
-        arrVal--;
-        newN--;
-    }
-    printf("\n");
-    printf("\n");
-    for (int i = 0; i < n; ++i){
-        printf("%d ", substitution[i]);
-    }
 }
 
 int *numberToFactorial(int x, int n){
