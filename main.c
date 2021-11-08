@@ -6,25 +6,29 @@ int *numberToFactorial(int x, int n);
 int *numberToSubstitution(int *number, int size);
 int *substitutionToFactorial(int *sub, int size);
 int factorialCounting(int x);
+int factorialNumberToNumber(int *number, int size);
 
 int main(){
 
     int n = 5;
-    int *arr = numberToFactorial(100,n);
+    int x = 100;
+    printf("START NUMBER\n");
+    printf("%d\n ",x);
+    int *arr = numberToFactorial(x,n);
     int *sub = numberToSubstitution(arr,n);
     printf("\n\nSUBSTITUTION\n");
     for (int i = 0; i < n; ++i){
-        printf("%d, ",sub[i]);
+        printf("%d ",sub[i]);
     }
     int *factNum = substitutionToFactorial(sub,n);
     printf("\n\nFACTORIAL NUMBER\n");
     for (int j = 0; j < n; ++j){
-        printf("%d, ",factNum[j]);
+        printf("%d ",factNum[j]);
     }
     printf("\n");
-    int a = factorialCounting(10);
-    printf("%d ",a);
-
+    int number = factorialNumberToNumber(factNum,n);
+    printf("\nFINAL NUMBER\n");
+    printf("%d\n ",number);
 }
 
 int *numberToSubstitution(int *number, int size){
@@ -87,10 +91,10 @@ int *numberToFactorial(int x, int n){
     positions[n-1] = 0;
     while (counter > 0){
         int temp = floor(x/q);
-        printf("\nq = %d ",q);
-        printf("\n%d", temp);
+        //printf("\nq = %d ",q);
+        //printf("\n%d", temp);
         int val = x - (temp*q);
-        printf("\n%d", val);
+        //printf("\n%d", val);
         positions[counter] = val;
         x = temp;
         ++q;
@@ -141,4 +145,18 @@ int *substitutionToFactorial(int *sub, int size) {
 
 int factorialCounting(int x){
     return (x==0) || (x==1) ? 1 : x* factorialCounting(x-1);
+}
+
+int factorialNumberToNumber(int *number, int size){
+    int *numberRev = calloc (size,sizeof(int));
+    int result = 0;
+    for (int r = 0,t = size-1; r < size, t>=0; ++r, t--){
+        numberRev[t] = number[r];
+    }
+    for (int i = 0; i < size; ++i){
+        result += numberRev[i]*factorialCounting(numberRev[i]);
+        //printf("\n%d ",result);
+    }
+    free(numberRev);
+    return result;
 }
