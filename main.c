@@ -4,17 +4,20 @@
 
 int *numberToFactorial(int x, int n);
 int *numberToSubstitution(int *number, int size);
+void substitutionToFactorial(int *sub, int size);
 
 int main(){
 
-    int n = 7;
-    int *arr = numberToFactorial(5039,n);
+    int n = 5;
+    int *arr = numberToFactorial(100,n);
     int *sub = numberToSubstitution(arr,n);
     printf("\n\nRESULT\n");
     for (int i = 0; i < n; ++i){
         printf("%d, ",sub[i]);
     }
     printf("\n");
+    substitutionToFactorial(sub,n);
+
 }
 
 int *numberToSubstitution(int *number, int size){
@@ -97,4 +100,26 @@ int *numberToFactorial(int x, int n){
     printf("\n");
     free(positions);
     return positionsRev;
+}
+
+void substitutionToFactorial(int *sub, int size) {
+    int value = size;
+    int flag = 0;
+    int innerCounter = 0;
+    int counter = 0;
+    while (counter<size) {
+        for (int i = 0; i < size; ++i) {
+            if (flag == 1 && sub[i] < value) {
+                ++innerCounter;
+            }
+            if (sub[i] == value) {
+                flag = 1;
+            }
+        }
+        printf("IC = %d ",innerCounter);
+        innerCounter = 0;
+        flag = 0;
+        ++counter;
+        value--;
+    }
 }
